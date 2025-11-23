@@ -208,6 +208,10 @@ MonoBehaviour:
   rb: {fileID: 84473079}
   horizontalMultiplier: 1.7
   speedIncreasePerPoint: 0.05
+  jumpForce: 1000
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!65 &84473078
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 public class Coin : MonoBehaviour
@@ -6,7 +5,7 @@ public class Coin : MonoBehaviour
     [SerializeField] float turnSpeed = 90f;
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.GetComponent<Obstacle>() != null)
+        if (other.gameObject.GetComponent<Obstacle>() != null)
         {
             Destroy(gameObject);
             return;

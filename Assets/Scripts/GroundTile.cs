@@ -5,7 +5,8 @@ public class GroundTile : MonoBehaviour
     GroundSpawner groundSpawner;
     [SerializeField] GameObject obstaclePrefab;
     [SerializeField] GameObject coinPrefab;
-
+    [SerializeField] GameObject tallObstaclePrefab;
+    [SerializeField] float tallObstacleChance = 0.3f;
 
     void Start()
     {
@@ -20,11 +21,18 @@ public class GroundTile : MonoBehaviour
 
     public void SpawnObstacle()
     {
+        GameObject obstacleToSpawn = obstaclePrefab;
+        float random = Random.Range(0f, 1f);
+        if (random < tallObstacleChance)
+        {
+            obstacleToSpawn = tallObstaclePrefab;
+        }
+
         int obstacleSpawnIndex = Random.Range(2, 5);
         Transform spawnPoint = transform.GetChild(obstacleSpawnIndex).transform;
 
 
-        Instantiate(obstaclePrefab, spawnPoint.position, Quaternion.identity, transform);
+        Instantiate(obstacleToSpawn, spawnPoint.position, Quaternion.identity, transform);
     }
 
     public void SpawnCoins()
@@ -32,12 +40,12 @@ public class GroundTile : MonoBehaviour
         int coinsToSpawn = 10;
         for (int i = 0; i < coinsToSpawn; i++)
         {
-          GameObject temp =  Instantiate(coinPrefab, transform);
+            GameObject temp = Instantiate(coinPrefab, transform);
             temp.transform.position = GetRandomPointInCollider(GetComponent<Collider>());
         }
     }
 
-    Vector3 GetRandomPointInCollider (Collider collider)
+    Vector3 GetRandomPointInCollider(Collider collider)
     {
         Vector3 point = new Vector3(
             Random.Range(collider.bounds.min.x, collider.bounds.max.x),
@@ -45,7 +53,7 @@ public class GroundTile : MonoBehaviour
             Random.Range(collider.bounds.min.z, collider.bounds.max.z)
             );
 
-        if(point != collider.ClosestPoint(point))
+        if (point != collider.ClosestPoint(point))
         {
             point = GetRandomPointInCollider(collider);
         }
@@ -53,5 +61,5 @@ public class GroundTile : MonoBehaviour
         point.y = 1;
         return point;
     }
-   
+
 }
