@@ -3,30 +3,22 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public int score;
+    int score;
     public static GameManager inst;
 
-    public TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] PlayerMovement playerMovement;
 
 
     public void IncrementScore()
     {
         score++;
         scoreText.text = "Score: " + score;
+        playerMovement.speed += playerMovement.speedIncreasePerPoint;
     }
 
     private void Awake()
     {
         inst = this;
-    }
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

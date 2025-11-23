@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    public float turnSpeed = 90f;
+    [SerializeField] float turnSpeed = 90f;
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.GetComponent<Obstacle>() != null)
@@ -20,11 +20,6 @@ public class Coin : MonoBehaviour
         GameManager.inst.IncrementScore();
 
         Destroy(gameObject);
-    }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame

@@ -207,6 +207,7 @@ MonoBehaviour:
   speed: 10
   rb: {fileID: 84473079}
   horizontalMultiplier: 1.7
+  speedIncreasePerPoint: 0.05
 --- !u!65 &84473078
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -972,8 +973,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7caa4372a13475448e8ccba8edd7bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
   scoreText: {fileID: 1527140563}
+  playerMovement: {fileID: 84473077}
 --- !u!4 &1548878906
 Transform:
   m_ObjectHideFlags: 0

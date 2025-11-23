@@ -6,14 +6,10 @@ public class PlayerMovement : MonoBehaviour
 
     public bool alive = true;
     public float speed = 5;
-    public Rigidbody rb;
+    [SerializeField] Rigidbody rb;
     float horizontalInput;
-    public float horizontalMultiplier;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void FixedUpdate()
-    {
-        
-    }
+    [SerializeField] float horizontalMultiplier;
+    public float speedIncreasePerPoint = 0.5f;
 
     // Update is called once per frame
     void Update()
