@@ -11,7 +11,7 @@ public class Coin : MonoBehaviour
             return;
         }
 
-        if (other.CompareTag("Player"))
+        if (!other.CompareTag("Player"))
         {
             return;
         }
