@@ -6,14 +6,25 @@ public class PlayerMovement : MonoBehaviour
 
     public bool alive = true;
     public float speed = 5;
-    [SerializeField] Rigidbody rb;
+    private Rigidbody rb;
     float horizontalInput;
     [SerializeField] float horizontalMultiplier;
     public float speedIncreasePerPoint = 0.5f;
 
     [SerializeField] float jumpForce = 400.0f;
     [SerializeField] LayerMask groundMask;
-
+    private void Awake()
+    {
+       
+        rb = GetComponent<Rigidbody>();
+        if (!rb)
+        {
+            Debug.Log("Aucune composante de RigidBody associé à l'objet Player");
+            enabled = false;
+            return;
+        }
+        
+    }
     private void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");

@@ -2,21 +2,43 @@ using UnityEngine;
 
 public class GroundTile : MonoBehaviour
 {
-    GroundSpawner groundSpawner;
+    private GroundSpawner groundSpawner;
     [SerializeField] GameObject obstaclePrefab;
     [SerializeField] GameObject coinPrefab;
     [SerializeField] GameObject tallObstaclePrefab;
     [SerializeField] float tallObstacleChance = 0.3f;
 
+    private void Awake()
+    {
+
+       GameObject groundSpawnerGO = GameObject.FindGameObjectWithTag("GroundSpawner");
+        if (!groundSpawnerGO)
+        {
+            Debug.Log("Aucun GroundSpawner trouvé dans la scène");
+            enabled = false;
+            return;
+        }
+        groundSpawner = groundSpawnerGO.GetComponent<GroundSpawner>();
+        if (!groundSpawner)
+        {
+            Debug.Log("Aucun script groundSpawner associé avec le GroundSpawner");
+            enabled = false;
+            return;
+        }
+
+    }
     void Start()
     {
-        groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
     }
 
     private void OnTriggerExit(Collider other)
     {
-        groundSpawner.SpawnTile(true);
-        Destroy(gameObject, 2);
+        if(other.CompareTag("Player"))
+        {
+            groundSpawner.SpawnTile(true);
+            Destroy(gameObject, 2);
+        }
+ 
     }
 
     public void SpawnObstacle()
@@ -38,10 +60,11 @@ public class GroundTile : MonoBehaviour
     public void SpawnCoins()
     {
         int coinsToSpawn = 10;
+        Collider col = GetComponent<Collider>();
         for (int i = 0; i < coinsToSpawn; i++)
         {
             GameObject temp = Instantiate(coinPrefab, transform);
-            temp.transform.position = GetRandomPointInCollider(GetComponent<Collider>());
+            temp.transform.position = GetRandomPointInCollider(col);
         }
     }
 
