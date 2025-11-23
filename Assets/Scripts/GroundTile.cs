@@ -27,9 +27,6 @@ public class GroundTile : MonoBehaviour
         }
 
     }
-    void Start()
-    {
-    }
 
     private void OnTriggerExit(Collider other)
     {

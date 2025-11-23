@@ -5,13 +5,13 @@ public class Coin : MonoBehaviour
     [SerializeField] float turnSpeed = 90f;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<Obstacle>() != null)
+        if (other.CompareTag("Obstacle"))
         {
             Destroy(gameObject);
             return;
         }
 
-        if (other.gameObject.name != "Player")
+        if (other.CompareTag("Player"))
         {
             return;
         }
