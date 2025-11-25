@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     public void IncrementScore()
     {
         scoreCoins++;
-        coinsText.text = "Score: " + scoreCoins;
+        coinsText.text = "Pièces: " + scoreCoins;
         playerMovement.speed += playerMovement.speedIncreasePerPoint;
     }
 
