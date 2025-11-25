@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 5;
     private Rigidbody rb;
     private Animator playerAnim;
+    public bool gameOver = false;
     float horizontalInput;
     [SerializeField] float horizontalMultiplier;
     public float speedIncreasePerPoint = 0.5f;
