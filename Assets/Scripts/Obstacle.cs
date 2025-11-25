@@ -3,7 +3,6 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour
 {
     PlayerMovement playerMovement;
-
     private void Awake()
     {
 

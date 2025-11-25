@@ -11,7 +11,7 @@ public class GroundTile : MonoBehaviour
     private void Awake()
     {
 
-       GameObject groundSpawnerGO = GameObject.FindGameObjectWithTag("GroundSpawner");
+        GameObject groundSpawnerGO = GameObject.FindGameObjectWithTag("GroundSpawner");
         if (!groundSpawnerGO)
         {
             Debug.Log("Aucun GroundSpawner trouvé dans la scène");
@@ -30,12 +30,12 @@ public class GroundTile : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             groundSpawner.SpawnTile(true);
             Destroy(gameObject, 2);
         }
- 
+
     }
 
     public void SpawnObstacle()

@@ -1,5 +1,7 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,13 +13,16 @@ public class GameManager : MonoBehaviour
     private AudioSource gameManagerAudio;
     private int lastMilestoneScore = 0;
 
-
+    public bool isGameActive;
+    public TextMeshProUGUI gameOverText;
+    public Button restartButton;
     private float score;
     [SerializeField] TextMeshProUGUI coinsText;
     [SerializeField] PlayerMovement playerMovement;
 
     void Start()
     {
+        isGameActive = true;
         pm = GameObject.Find("Player").GetComponent<PlayerMovement>();
         gameManagerAudio = GetComponent<AudioSource>();
 
@@ -27,7 +32,7 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        if (!pm.gameOver)
+        if (isGameActive)
         {
             score += Time.deltaTime * 5;
 
@@ -68,5 +73,17 @@ public class GameManager : MonoBehaviour
             lastMilestoneScore = currentMilestone;
 
         }
+    }
+
+    public void GameOver()
+    {
+        isGameActive = false;
+        gameOverText.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
