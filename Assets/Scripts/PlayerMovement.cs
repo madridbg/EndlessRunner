@@ -65,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
           playerAnim.SetBool("Death_b", true);
           playerAnim.SetInteger("DeathType_int", 1);
         
+        
 
         Invoke(nameof(Restart), 3.0f);
     }
