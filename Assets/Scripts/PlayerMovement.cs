@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public bool alive = true;
     public float speed = 5;
     private Rigidbody rb;
+    private Animator playerAnim;
     float horizontalInput;
     [SerializeField] float horizontalMultiplier;
     public float speedIncreasePerPoint = 0.5f;
@@ -15,15 +16,21 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask groundMask;
     private void Awake()
     {
-       
-        rb = GetComponent<Rigidbody>();
+        playerAnim = GetComponent<Animator>();
+;        rb = GetComponent<Rigidbody>();
         if (!rb)
         {
             Debug.Log("Aucune composante de RigidBody associé à l'objet Player");
             enabled = false;
             return;
         }
-        
+        if (!playerAnim)
+        {
+            Debug.Log("Aucune composante de Aninmator dans le player");
+            enabled = false;
+            return;
+        }
+
     }
     private void Update()
     {
@@ -52,8 +59,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
+        if (!alive) return;
         alive = false;
-        Invoke(nameof(Restart), 2.0f);
+
+          playerAnim.SetBool("Death_b", true);
+          playerAnim.SetInteger("DeathType_int", 1);
+        
+
+        Invoke(nameof(Restart), 3.0f);
     }
 
     void Restart()
