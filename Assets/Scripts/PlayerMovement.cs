@@ -1,3 +1,4 @@
+using Mono.Cecil;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -16,12 +17,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask groundMask;
     public AudioClip crashSound;
     private AudioSource playerAudio;
+    private AudioSource backgroundAudio;
+    public GameObject groundTile;
     private void Awake()
     {
         playerAudio = GetComponent<AudioSource>();
         playerAnim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        backgroundAudio = GameObject.Find("Main Camera").GetComponent<AudioSource>();
+        
         if (!rb)
         {
             Debug.Log("Aucune composante de RigidBody associé à l'objet Player");
@@ -54,7 +59,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!alive) return;
 
+        float groundSize = groundTile.GetComponent<BoxCollider>().size.x/2;
         Vector3 forwardMove = transform.forward * Time.fixedDeltaTime * speed;
+        if ((rb.position.x >= groundSize && horizontalInput > 0) 
+            || (rb.position.x <= -groundSize && horizontalInput < 0))
+        {
+            horizontalInput = 0;
+        }
         Vector3 horizontalMove = transform.right * horizontalInput * speed * Time.fixedDeltaTime * horizontalMultiplier;
 
         rb.MovePosition(rb.position + forwardMove + horizontalMove);
@@ -71,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
         explosionParticle.Play();
         playerAudio.PlayOneShot(crashSound, 1.0f);
         gameManager.GameOver();
+        backgroundAudio.Stop();
     }
 
     void Jump()

@@ -226,6 +226,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   crashSound: {fileID: 8300000, guid: a5e03bdf68a774d7bbdd11fe48caaf4c, type: 3}
+  groundTile: {fileID: 731979985928998501, guid: 2cb1c31e22701b14ab97e8e31d1b7af5, type: 3}
 --- !u!65 &84473078
 BoxCollider:
   m_ObjectHideFlags: 0
