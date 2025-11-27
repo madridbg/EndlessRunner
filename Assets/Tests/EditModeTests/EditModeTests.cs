@@ -1,24 +1,28 @@
 using System.Collections;
 using NUnit.Framework;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.TestTools;
 
 public class EditModeTests
 {
-    // A Test behaves as an ordinary method
     [Test]
-    public void EditModeTestsSimplePasses()
+    public void TestConfigPrefab_Obstacle_Madrid()
     {
-        // Use the Assert class to test conditions
-    }
+        string assetPath = "Assets/Prefab/Obstacle.prefab";
+        var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
+        Assert.IsNotNull(prefab, "Le prefab obstacle est introuvable");
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-    [UnityTest]
-    public IEnumerator EditModeTestsWithEnumeratorPasses()
-    {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
+        var bc = prefab.GetComponent<BoxCollider>();
+        Assert.IsNotNull(bc, "Le prefab obstacle ne détient pas de Box Collider");
+
+        var render = prefab.GetComponent<MeshRenderer>();
+        Assert.IsNotNull(render, "Le prefab obstacle ne détient pas de composant Renderer");
+
+        string materialPath = "Assets/Materials/Obstacle_Mat.mat";
+        var expectedMaterial = AssetDatabase.LoadAssetAtPath<Material>(materialPath);
+        Assert.IsNotNull(expectedMaterial, $"Le material de référence n'a pas été trouvé au chemin {materialPath}");
+
+        Assert.AreEqual(expectedMaterial, render.sharedMaterial, "Le material assigné à l'obstacle ne correspond pas au bon");
     }
 }
