@@ -7,16 +7,18 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 5;
     private Rigidbody rb;
     private Animator playerAnim;
-    public bool gameOver = false;
     float horizontalInput;
     [SerializeField] float horizontalMultiplier;
     public float speedIncreasePerPoint = 0.5f;
     private GameManager gameManager;
-
+    public ParticleSystem explosionParticle;
     [SerializeField] float jumpForce = 400.0f;
     [SerializeField] LayerMask groundMask;
+    public AudioClip crashSound;
+    private AudioSource playerAudio;
     private void Awake()
     {
+        playerAudio = GetComponent<AudioSource>();
         playerAnim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -66,6 +68,8 @@ public class PlayerMovement : MonoBehaviour
 
         playerAnim.SetBool("Death_b", true);
         playerAnim.SetInteger("DeathType_int", 1);
+        explosionParticle.Play();
+        playerAudio.PlayOneShot(crashSound, 1.0f);
         gameManager.GameOver();
     }
 
