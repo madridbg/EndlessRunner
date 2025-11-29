@@ -1,24 +1,41 @@
-using System.Collections;
 using NUnit.Framework;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
 public class PlayModeTests
 {
-    // A Test behaves as an ordinary method
-    [Test]
-    public void PlayModeTestsSimplePasses()
-    {
-        // Use the Assert class to test conditions
-    }
-
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
     [UnityTest]
-    public IEnumerator PlayModeTestsWithEnumeratorPasses()
+    public IEnumerator GameTest_Madrid()
     {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
+        const string scenePath = "Assets/Scenes/EndlessRunner.unity";
+        var op = SceneManager.LoadSceneAsync(scenePath, LoadSceneMode.Single);
+
+        while (!op.isDone)
+        {
+            yield return null;
+
+        }
+
+        var player = GameObject.Find("Player");
+        Assert.IsTrue(player != null, "Pas de joueur trouvé par le nom");
+
+        var playerMovement = player.GetComponent<PlayerMovement>();
+        Assert.IsTrue(playerMovement != null, "Le script PlayerMovement n'existe pas sur player");
+
+        Assert.IsTrue(playerMovement.alive, "Le player devrait être vivant du début du test");
+
+        yield return new WaitForSeconds(3.0f);
+
+        var obstacle = GameObject.FindGameObjectWithTag("Obstacle");
+        Assert.IsNotNull(obstacle, "Auncun obstacle trouvé avec le tag obstacle");
+
+        player.transform.position = obstacle.transform.position;
+
+        yield return new WaitForFixedUpdate();
+        yield return new WaitForSeconds(0.1f);
+
+        Assert.IsFalse(playerMovement.alive, "Le joueur devrait être mort après la collision");
     }
 }
