@@ -40,7 +40,7 @@ public class PlayModeTests
     }
 
     [UnityTest]
-    public IEnumerator ObstacleSansJoueur_Madrid()
+    public IEnumerator ObstacleSansJoueurMovement_Madrid()
     {
         const string scenePath = "Assets/Scenes/EndlessRunner.unity";
         var op = SceneManager.LoadSceneAsync(scenePath, LoadSceneMode.Single);
@@ -54,7 +54,9 @@ public class PlayModeTests
         var playerGO = GameObject.FindGameObjectWithTag("Player");
         Assert.IsNotNull(playerGO, "Player avec tag Player existe pas");
 
-        Object.Destroy(playerGO);
+       // Object.Destroy(playerGO);
+        var playerMovement = playerGO.GetComponent<PlayerMovement>();
+        Object.Destroy(playerMovement);
 
         yield return null;
 
@@ -64,6 +66,8 @@ public class PlayModeTests
 
 
     }
+ 
+
 
 
 }

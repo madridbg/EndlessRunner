@@ -1,36 +1,36 @@
 {
   "summary": {
-    "generatedon": "2025-11-29T21:59:22Z",
+    "generatedon": "2025-11-29T22:28:23Z",
     "parser": "MultiReportParser (4x OpenCoverParser)",
     "assemblies": 4,
     "classes": 10,
     "files": 10,
-    "coveredlines": 247,
-    "uncoveredlines": 191,
-    "coverablelines": 438,
-    "totallines": 786,
-    "linecoverage": 56.3,
+    "coveredlines": 244,
+    "uncoveredlines": 195,
+    "coverablelines": 439,
+    "totallines": 790,
+    "linecoverage": 55.5,
     "coveredbranches": 0,
     "totalbranches": 0,
-    "coveredmethods": 63,
-    "totalmethods": 89,
-    "methodcoverage": 70.7
+    "coveredmethods": 34,
+    "totalmethods": 51,
+    "methodcoverage": 66.6
  },
   "coverage": {
     "assemblies": [
-      { "name": "Assembly-CSharp-Editor", "classes": 1, "coverage": 0, "coveredlines": 0, "coverablelines": 140, "totallines": 239, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 22, "classesinassembly": [
-        { "name": "ReadmeEditor", "coverage": 0, "coveredlines": 0, "coverablelines": 140, "totallines": 239, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 22 } ] },
-      { "name": "EditModeTests", "classes": 1, "coverage": 91.4, "coveredlines": 32, "coverablelines": 35, "totallines": 69, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 6, "totalmethods": 6, "classesinassembly": [
-        { "name": "EditModeTests", "coverage": 91.4, "coveredlines": 32, "coverablelines": 35, "totallines": 69, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 6, "totalmethods": 6 } ] },
-      { "name": "PlayModeTests", "classes": 1, "coverage": 100, "coveredlines": 33, "coverablelines": 33, "totallines": 69, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 3, "totalmethods": 3, "classesinassembly": [
-        { "name": "PlayModeTests", "coverage": 100, "coveredlines": 33, "coverablelines": 33, "totallines": 69, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 3, "totalmethods": 3 } ] },
-      { "name": "Scripts", "classes": 7, "coverage": 79.1, "coveredlines": 182, "coverablelines": 230, "totallines": 409, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 93.1, "coveredmethods": 54, "totalmethods": 58, "classesinassembly": [
-        { "name": "CameraFollow", "coverage": 100, "coveredlines": 8, "coverablelines": 8, "totallines": 21, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 4, "totalmethods": 4 },
-        { "name": "Coin", "coverage": 100, "coveredlines": 15, "coverablelines": 15, "totallines": 29, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 5, "totalmethods": 5 },
-        { "name": "GameManager", "coverage": 77.2, "coveredlines": 34, "coverablelines": 44, "totallines": 89, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 86.6, "coveredmethods": 13, "totalmethods": 15 },
-        { "name": "GroundSpawner", "coverage": 100, "coveredlines": 21, "coverablelines": 21, "totallines": 33, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 4, "totalmethods": 4 },
-        { "name": "GroundTile", "coverage": 78.4, "coveredlines": 40, "coverablelines": 51, "totallines": 85, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 11, "totalmethods": 11 },
-        { "name": "Obstacle", "coverage": 82.6, "coveredlines": 19, "coverablelines": 23, "totallines": 43, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 6, "totalmethods": 6 },
-        { "name": "PlayerMovement", "coverage": 66.1, "coveredlines": 45, "coverablelines": 68, "totallines": 109, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 84.6, "coveredmethods": 11, "totalmethods": 13 } ] } ]
+      { "name": "Assembly-CSharp-Editor", "classes": 1, "coverage": 0, "coveredlines": 0, "coverablelines": 140, "totallines": 239, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 14, "classesinassembly": [
+        { "name": "ReadmeEditor", "coverage": 0, "coveredlines": 0, "coverablelines": 140, "totallines": 239, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 14 } ] },
+      { "name": "EditModeTests", "classes": 1, "coverage": 100, "coveredlines": 35, "coverablelines": 35, "totallines": 69, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 3, "totalmethods": 3, "classesinassembly": [
+        { "name": "EditModeTests", "coverage": 100, "coveredlines": 35, "coverablelines": 35, "totallines": 69, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 3, "totalmethods": 3 } ] },
+      { "name": "PlayModeTests", "classes": 1, "coverage": 100, "coveredlines": 34, "coverablelines": 34, "totallines": 73, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 3, "totalmethods": 3, "classesinassembly": [
+        { "name": "PlayModeTests", "coverage": 100, "coveredlines": 34, "coverablelines": 34, "totallines": 73, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 3, "totalmethods": 3 } ] },
+      { "name": "Scripts", "classes": 7, "coverage": 76, "coveredlines": 175, "coverablelines": 230, "totallines": 409, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 90.3, "coveredmethods": 28, "totalmethods": 31, "classesinassembly": [
+        { "name": "CameraFollow", "coverage": 100, "coveredlines": 8, "coverablelines": 8, "totallines": 21, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 2, "totalmethods": 2 },
+        { "name": "Coin", "coverage": 86.6, "coveredlines": 13, "coverablelines": 15, "totallines": 29, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 3, "totalmethods": 3 },
+        { "name": "GameManager", "coverage": 65.9, "coveredlines": 29, "coverablelines": 44, "totallines": 89, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 75, "coveredmethods": 6, "totalmethods": 8 },
+        { "name": "GroundSpawner", "coverage": 100, "coveredlines": 21, "coverablelines": 21, "totallines": 33, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 2, "totalmethods": 2 },
+        { "name": "GroundTile", "coverage": 78.4, "coveredlines": 40, "coverablelines": 51, "totallines": 85, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 6, "totalmethods": 6 },
+        { "name": "Obstacle", "coverage": 82.6, "coveredlines": 19, "coverablelines": 23, "totallines": 43, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 3, "totalmethods": 3 },
+        { "name": "PlayerMovement", "coverage": 66.1, "coveredlines": 45, "coverablelines": 68, "totallines": 109, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 85.7, "coveredmethods": 6, "totalmethods": 7 } ] } ]
   }
 }
