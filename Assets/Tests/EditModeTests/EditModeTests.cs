@@ -65,5 +65,26 @@ public class EditModeTests
         Object.DestroyImmediate(obstacleGO);
         Object.DestroyImmediate(groundObj);
     }
+
+    [Test]
+    public void TestConfigPrefab_GroundTile_Emerick()
+    {
+        string assetPath = "Assets/Prefab/GroundTile.prefab";
+        var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
+        Assert.IsNotNull(prefab, "Le prefab GroundTile est introuvable");
+        Assert.AreEqual("Ground", prefab.tag, "Le non du tag n'est pas le bon");
+
+        var boxCollider = prefab.GetComponent<BoxCollider>();
+        Assert.IsNotNull(boxCollider, "Le BoxCollider de GroundTile n'est pas trouver");
+        Assert.IsTrue(boxCollider.isTrigger, "Le BoxCollider doit être en IsTrigger");
+
+        var scritp = prefab.GetComponent<GroundTile>();
+        Assert.IsNotNull(scritp, "Le script Ground Tile est introuvable");
+        Assert.IsNotNull(scritp.tallObstacleChance, "Le parametre tallObstacleChance est introuvable");
+
+        var trueValue = 0.3f;
+        var expectedValue = scritp.tallObstacleChance;
+        Assert.AreEqual(expectedValue,trueValue, "La valeur de tallObstacleChance n'est pas 0.3");
+    }
 }
 
