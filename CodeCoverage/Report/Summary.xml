@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Summary">
+  <Summary>
+    <Generatedon>2025-11-29 - 16:59:22</Generatedon>
+    <Parser>MultiReportParser (4x OpenCoverParser)</Parser>
+    <Assemblies>4</Assemblies>
+    <Classes>10</Classes>
+    <Files>10</Files>
+    <Coveredlines>247</Coveredlines>
+    <Uncoveredlines>191</Uncoveredlines>
+    <Coverablelines>438</Coverablelines>
+    <Totallines>786</Totallines>
+    <Linecoverage>56.3</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>63</Coveredmethods>
+    <Totalmethods>89</Totalmethods>
+    <Methodcoverage>70.7</Methodcoverage>
+  </Summary>
+  <Coverage>
+    <Assembly name="Assembly-CSharp-Editor" classes="1" coverage="0" coveredlines="0" coverablelines="140" totallines="239" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="22" methodcoverage="0">
+      <Class name="ReadmeEditor" coverage="0" coveredlines="0" coverablelines="140" totallines="239" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="22" methodcoverage="0" />
+    </Assembly>
+    <Assembly name="EditModeTests" classes="1" coverage="91.4" coveredlines="32" coverablelines="35" totallines="69" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="6" methodcoverage="100">
+      <Class name="EditModeTests" coverage="91.4" coveredlines="32" coverablelines="35" totallines="69" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="6" methodcoverage="100" />
+    </Assembly>
+    <Assembly name="PlayModeTests" classes="1" coverage="100" coveredlines="33" coverablelines="33" totallines="69" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100">
+      <Class name="PlayModeTests" coverage="100" coveredlines="33" coverablelines="33" totallines="69" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
+    </Assembly>
+    <Assembly name="Scripts" classes="7" coverage="79.1" coveredlines="182" coverablelines="230" totallines="409" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="54" totalmethods="58" methodcoverage="93.1">
+      <Class name="CameraFollow" coverage="100" coveredlines="8" coverablelines="8" totallines="21" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="4" methodcoverage="100" />
+      <Class name="Coin" coverage="100" coveredlines="15" coverablelines="15" totallines="29" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="5" methodcoverage="100" />
+      <Class name="GameManager" coverage="77.2" coveredlines="34" coverablelines="44" totallines="89" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="13" totalmethods="15" methodcoverage="86.6" />
+      <Class name="GroundSpawner" coverage="100" coveredlines="21" coverablelines="21" totallines="33" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="4" methodcoverage="100" />
+      <Class name="GroundTile" coverage="78.4" coveredlines="40" coverablelines="51" totallines="85" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="11" totalmethods="11" methodcoverage="100" />
+      <Class name="Obstacle" coverage="82.6" coveredlines="19" coverablelines="23" totallines="43" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="6" methodcoverage="100" />
+      <Class name="PlayerMovement" coverage="66.1" coveredlines="45" coverablelines="68" totallines="109" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="11" totalmethods="13" methodcoverage="84.6" />
+    </Assembly>
+  </Coverage>
+</CoverageReport>

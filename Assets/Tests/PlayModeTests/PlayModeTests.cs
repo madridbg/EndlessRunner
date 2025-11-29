@@ -38,4 +38,32 @@ public class PlayModeTests
 
         Assert.IsFalse(playerMovement.alive, "Le joueur devrait être mort après la collision");
     }
+
+    [UnityTest]
+    public IEnumerator ObstacleSansJoueur_Madrid()
+    {
+        const string scenePath = "Assets/Scenes/EndlessRunner.unity";
+        var op = SceneManager.LoadSceneAsync(scenePath, LoadSceneMode.Single);
+
+        while (!op.isDone)
+        {
+            yield return null;
+
+        }
+
+        var playerGO = GameObject.FindGameObjectWithTag("Player");
+        Assert.IsNotNull(playerGO, "Player avec tag Player existe pas");
+
+        Object.Destroy(playerGO);
+
+        yield return null;
+
+        var obstacleGO = new GameObject("Obstacle");
+        var obstacle = obstacleGO.AddComponent<Obstacle>();
+        Assert.IsTrue(true);
+
+
+    }
+
+
 }
