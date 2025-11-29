@@ -1,4 +1,5 @@
 using System.Collections;
+using NSubstitute;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
@@ -25,4 +26,44 @@ public class EditModeTests
 
         Assert.AreEqual(expectedMaterial, render.sharedMaterial, "Le material assigné à l'obstacle ne correspond pas au bon");
     }
+
+    [Test]
+    public void CollisionAvecObsatcle_PlayerMeurt_Madrid()
+    {
+        GameObject obstacleGO = new GameObject("Obstacle");
+        Obstacle obstacle = obstacleGO.AddComponent<Obstacle>();
+
+        IPlayerMovement mockPlayer = Substitute.For<IPlayerMovement>();
+
+        obstacle.playerMovement = mockPlayer;
+
+        GameObject playerObj = new GameObject("Player");
+
+        obstacle.CheckCollision(playerObj);
+
+        mockPlayer.Received(1).Die();
+
+        Object.DestroyImmediate(obstacleGO);
+        Object.DestroyImmediate(playerObj);
+    }
+
+    [Test]
+    public void CollisionSol_PlayerMeurtPas_Madrid()
+    {
+        GameObject obstacleGO = new GameObject("Obstacle");
+        Obstacle obstacle = obstacleGO.AddComponent<Obstacle>();
+
+        IPlayerMovement mockPlayer = Substitute.For<IPlayerMovement>();
+        obstacle.playerMovement = mockPlayer;
+
+        GameObject groundObj = new GameObject("Ground");
+
+        obstacle.CheckCollision(groundObj);
+
+        mockPlayer.DidNotReceive().Die();
+
+        Object.DestroyImmediate(obstacleGO);
+        Object.DestroyImmediate(groundObj);
+    }
 }
+

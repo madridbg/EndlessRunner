@@ -1,8 +1,12 @@
 using UnityEngine;
 
+public interface IPlayerMovement
+{
+    void Die();
+}
 public class Obstacle : MonoBehaviour
 {
-    PlayerMovement playerMovement;
+    public IPlayerMovement playerMovement;
     private void Awake()
     {
 
@@ -13,10 +17,11 @@ public class Obstacle : MonoBehaviour
             enabled = false;
             return;
         }
-        playerMovement = playerMovementGO.GetComponent<PlayerMovement>();
-        if (!playerMovement)
+        playerMovement = playerMovementGO.GetComponent<IPlayerMovement>();
+
+        if (playerMovement == null)
         {
-            Debug.Log("Aucun script playerMOvement associé avec le Player");
+            Debug.Log("Le Player n'a pas de script implémentant IPlayerMovement");
             enabled = false;
             return;
         }
@@ -25,9 +30,14 @@ public class Obstacle : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Player")
+        CheckCollision(collision.gameObject);
+    }
+
+    public void CheckCollision(GameObject hitObject)
+    {
+        if (hitObject.name == "Player")
         {
-            playerMovement.Die();
+            if (playerMovement != null) playerMovement.Die();
         }
     }
 }

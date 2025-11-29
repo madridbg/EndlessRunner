@@ -1,7 +1,7 @@
 using Mono.Cecil;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IPlayerMovement
 {
 
     public bool alive = true;
