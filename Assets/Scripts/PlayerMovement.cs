@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
     private AudioSource playerAudio;
     private AudioSource backgroundAudio;
     public GameObject groundTile;
+    public ParticleSystem dust;
+    private bool isOnGround;
     private void Awake()
     {
         playerAudio = GetComponent<AudioSource>();
@@ -70,6 +72,16 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
 
         rb.MovePosition(rb.position + forwardMove + horizontalMove);
 
+        if(isOnGround)
+            dust.Play();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            isOnGround = true;
+        }
     }
 
     public void Die()
@@ -83,6 +95,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
         playerAudio.PlayOneShot(crashSound, 1.0f);
         gameManager.GameOver();
         backgroundAudio.Stop();
+        dust.Stop();
     }
 
     void Jump()
@@ -90,6 +103,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
         float height = GetComponent<Collider>().bounds.size.y;
         bool isGrounded = Physics.Raycast(transform.position, Vector3.down, (height / 2) + 0.1f, groundMask);
 
-        rb.AddForce(Vector3.up * jumpForce);
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        isOnGround = false;
     }
 }
