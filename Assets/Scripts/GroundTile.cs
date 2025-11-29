@@ -6,7 +6,7 @@ public class GroundTile : MonoBehaviour
     [SerializeField] GameObject obstaclePrefab;
     [SerializeField] GameObject coinPrefab;
     [SerializeField] GameObject tallObstaclePrefab;
-    [SerializeField] float tallObstacleChance = 0.3f;
+    public float tallObstacleChance = 0.3f;
 
     private void Awake()
     {
