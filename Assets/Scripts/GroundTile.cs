@@ -78,8 +78,8 @@ public class GroundTile : MonoBehaviour
         get
         {
             float randomXPosition = Random.Range(-3.3f, 3.3f);
-            float groundYPosition = transform.GetChild(0).transform.position.y;
-            float groundZPosition = transform.GetChild(0).transform.position.z;
+            float groundYPosition = transform.position.y;
+            float groundZPosition = transform.position.z;
             Vector3 spawnPoint = new Vector3(randomXPosition, groundYPosition, groundZPosition);
             return spawnPoint;
         }
@@ -89,7 +89,7 @@ public class GroundTile : MonoBehaviour
 
     public void SpawnCoins()
     {
-        int coinsToSpawn = 10;
+        int coinsToSpawn = 5;
         Collider col = GetComponent<Collider>();
         for (int i = 0; i < coinsToSpawn; i++)
         {
@@ -100,8 +100,9 @@ public class GroundTile : MonoBehaviour
 
     Vector3 GetRandomPointInCollider(Collider collider)
     {
+        int limitOffset = 1;
         Vector3 point = new Vector3(
-            Random.Range(collider.bounds.min.x, collider.bounds.max.x),
+            Random.Range(collider.bounds.min.x + limitOffset, collider.bounds.max.x - limitOffset),
             Random.Range(collider.bounds.min.y, collider.bounds.max.y),
             Random.Range(collider.bounds.min.z, collider.bounds.max.z)
             );
