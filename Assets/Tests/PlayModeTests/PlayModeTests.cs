@@ -1,5 +1,5 @@
-using NUnit.Framework;
 using System.Collections;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
@@ -54,7 +54,7 @@ public class PlayModeTests
         var playerGO = GameObject.FindGameObjectWithTag("Player");
         Assert.IsNotNull(playerGO, "Player avec tag Player existe pas");
 
-       // Object.Destroy(playerGO);
+        // Object.Destroy(playerGO);
         var playerMovement = playerGO.GetComponent<PlayerMovement>();
         Object.Destroy(playerMovement);
 

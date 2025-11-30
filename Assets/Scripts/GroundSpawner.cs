@@ -12,13 +12,13 @@ public class GroundSpawner : MonoBehaviour, IGroundSpawner
 
     public void SpawnTile(bool spawnItems)
     {
-        GameObject temp = Instantiate(groundTile, nextSpawnPoint, Quaternion.identity);
-        nextSpawnPoint = temp.transform.GetChild(1).transform.position;
+        GameObject ground = Instantiate(groundTile, nextSpawnPoint, Quaternion.identity);
+        nextSpawnPoint = ground.transform.GetChild(1).transform.position;
 
         if (spawnItems)
         {
-            temp.GetComponent<GroundTile>().SpawnObstacle();
-            temp.GetComponent<GroundTile>().SpawnCoins();
+            ground.GetComponent<GroundTile>().SpawnObstacle();
+            ground.GetComponent<GroundTile>().SpawnCoins();
         }
     }
     void Start()

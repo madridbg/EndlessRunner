@@ -1,4 +1,3 @@
-using Mono.Cecil;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour, IPlayerMovement
@@ -28,7 +27,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
         rb = GetComponent<Rigidbody>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         backgroundAudio = GameObject.Find("Main Camera").GetComponent<AudioSource>();
-        
+
         if (!rb)
         {
             Debug.Log("Aucune composante de RigidBody associé à l'objet Player");
@@ -61,9 +60,9 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
     {
         if (!alive) return;
 
-        float groundSize = groundTile.GetComponent<BoxCollider>().size.x/2;
+        float groundSize = groundTile.GetComponent<BoxCollider>().size.x / 2;
         Vector3 forwardMove = transform.forward * Time.fixedDeltaTime * speed;
-        if ((rb.position.x >= groundSize && horizontalInput > 0) 
+        if ((rb.position.x >= groundSize && horizontalInput > 0)
             || (rb.position.x <= -groundSize && horizontalInput < 0))
         {
             horizontalInput = 0;
@@ -72,7 +71,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
 
         rb.MovePosition(rb.position + forwardMove + horizontalMove);
 
-        if(isOnGround)
+        if (isOnGround)
             dust.Play();
     }
 

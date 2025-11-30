@@ -33,9 +33,6 @@ Transform:
   m_Children:
   - {fileID: 2213084637384850394}
   - {fileID: 4550130489922388422}
-  - {fileID: 8424316313034163094}
-  - {fileID: 87048296060488226}
-  - {fileID: 2906830307456480929}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &-1474344061036817131
@@ -71,103 +68,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1455b58fbd5ee874d89e830792fd757a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstaclePrefab: {fileID: 2517490613185140856, guid: eaa0f527839e3ad4a80b16e225e6d4be, type: 3}
+  smallObstaclesToSpawn:
+  - {fileID: 118212, guid: eb943255645f861438b7c488b017a629, type: 3}
+  - {fileID: 189736, guid: e2cc8398627422e4fbfeb72ac975fda4, type: 3}
+  - {fileID: 117208, guid: a4b7789a4ada22a4b898ab1ea11a10e4, type: 3}
+  - {fileID: 177750, guid: 43b8dff33eff0ea4fa5d8ff79feca548, type: 3}
+  - {fileID: 122224, guid: 5d91f90e9c449134d813c05de9925420, type: 3}
+  - {fileID: 174524, guid: bb31a620eabbce5408e6b75f8bad1e77, type: 3}
+  - {fileID: 127570, guid: 38bce189175d6ed4f83b5861c59a1b4b, type: 3}
+  - {fileID: 164744, guid: 63005949fcb9d1147bcc1f696caa95d2, type: 3}
+  largeObstaclesToSpawn:
+  - {fileID: 194934, guid: 9d93b9292eb39a5469056f7968d4307c, type: 3}
+  - {fileID: 106796, guid: dbb5415daa8b76341987d8451406cb60, type: 3}
+  - {fileID: 168790, guid: dd70d868a6c555e4d9f141affd138878, type: 3}
+  - {fileID: 164056, guid: 7a9ebb7ee6d1a864cbf4d063be4e5793, type: 3}
+  - {fileID: 121442, guid: 0e9215e9d1553d743afe8011f79ffadc, type: 3}
+  - {fileID: 174670, guid: 70aab276c2be66e4db9acf182a2905ce, type: 3}
   coinPrefab: {fileID: 6354270721361271496, guid: 36b2c07c6fb3af7458099ffa8dc6708a, type: 3}
-  tallObstaclePrefab: {fileID: 2517490613185140856, guid: 4d494c9b2a1bb6f46a446eb207ffe47d, type: 3}
-  tallObstacleChance: 0.3
---- !u!1 &1302537036100768987
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8424316313034163094}
-  m_Layer: 6
-  m_Name: ObstacleSpawnLeft
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8424316313034163094
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1302537036100768987}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.3, y: 0.5, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 300187746412509967}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5469446945688002370
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2906830307456480929}
-  m_Layer: 6
-  m_Name: ObstacleSpawnRight
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2906830307456480929
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5469446945688002370}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.3, y: 0.5, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 300187746412509967}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6071433707487711216
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 87048296060488226}
-  m_Layer: 6
-  m_Name: ObstacleSpawnMiddle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &87048296060488226
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6071433707487711216}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 300187746412509967}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  tallObstacleChance: 0.4
 --- !u!1 &8659949178695362019
 GameObject:
   m_ObjectHideFlags: 0

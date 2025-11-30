@@ -3,18 +3,32 @@ using UnityEngine;
 public class GroundTile : MonoBehaviour
 {
     public IGroundSpawner groundSpawner;
-    public GameObject obstaclePrefab;
+    public GameObject[] smallObstaclesToSpawn;
+    public GameObject[] largeObstaclesToSpawn;
     public GameObject coinPrefab;
-    public GameObject tallObstaclePrefab;
     public float tallObstacleChance = 0.3f;
+
+
+    const string groundSpawnerName = "GroundSpawner";
+
 
     private void Awake()
     {
+        var spawnerObj = GameObject.FindGameObjectWithTag(groundSpawnerName);
+        if (spawnerObj == null)
+        {
+            Debug.LogError($"Aucun objet nommé {groundSpawnerName} trouvé dans la scène.");
+            enabled = false;
+            return;
+        }
+        groundSpawner = spawnerObj.GetComponent<IGroundSpawner>();
         if (groundSpawner == null)
         {
-            var spawnerObj = GameObject.FindGameObjectWithTag("GroundSpawner");
-            if (spawnerObj != null)
-                groundSpawner = spawnerObj.GetComponent<IGroundSpawner>();
+
+            Debug.LogError($"Aucune composante IGroundSpawner associée à l'objet {groundSpawnerName} trouvé dans la scène.");
+            enabled = false;
+            return;
+
         }
     }
 
@@ -28,7 +42,7 @@ public class GroundTile : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             groundSpawner.SpawnTile(true);
-            if(Application.isPlaying)
+            if (Application.isPlaying)
                 Destroy(gameObject, 2);
             else
                 DestroyImmediate(gameObject);
@@ -37,19 +51,41 @@ public class GroundTile : MonoBehaviour
 
     public void SpawnObstacle()
     {
-        GameObject obstacleToSpawn = obstaclePrefab;
-        float random = Random.Range(0f, 1f);
-        if (random < tallObstacleChance)
+        GameObject obstacleToSpawn = RandomGameObject;
+        _ = Instantiate(obstacleToSpawn, RandomPosition, obstacleToSpawn.transform.rotation, transform);
+    }
+
+    private GameObject RandomGameObject
+    {
+        get
         {
-            obstacleToSpawn = tallObstaclePrefab;
+            int obstacleIndex = Random.Range(0, smallObstaclesToSpawn.Length);
+            GameObject obstacleToSpawn = smallObstaclesToSpawn[obstacleIndex];
+ 
+            // Déterminer s'il s'agit d'un obstacle large ou non. (Peut être modifié dans l'inspecteur)
+            float random = Random.Range(0.0f, 1.0f);
+            if (random < tallObstacleChance)
+            {
+                obstacleIndex = Random.Range(0, largeObstaclesToSpawn.Length);
+                obstacleToSpawn = largeObstaclesToSpawn[obstacleIndex];
+            }
+            return obstacleToSpawn;
+        }
+    }
+
+    private Vector3 RandomPosition
+    {
+        get
+        {
+            float randomXPosition = Random.Range(-3.3f, 3.3f);
+            float groundYPosition = transform.GetChild(0).transform.position.y;
+            float groundZPosition = transform.GetChild(0).transform.position.z;
+            Vector3 spawnPoint = new Vector3(randomXPosition, groundYPosition, groundZPosition);
+            return spawnPoint;
         }
 
-        int obstacleSpawnIndex = Random.Range(2, 5);
-        Transform spawnPoint = transform.GetChild(obstacleSpawnIndex).transform;
-
-
-        Instantiate(obstacleToSpawn, spawnPoint.position, Quaternion.identity, transform);
     }
+
 
     public void SpawnCoins()
     {
@@ -57,8 +93,8 @@ public class GroundTile : MonoBehaviour
         Collider col = GetComponent<Collider>();
         for (int i = 0; i < coinsToSpawn; i++)
         {
-            GameObject temp = Instantiate(coinPrefab, transform);
-            temp.transform.position = GetRandomPointInCollider(col);
+            GameObject coin = Instantiate(coinPrefab, transform);
+            coin.transform.position = GetRandomPointInCollider(col);
         }
     }
 

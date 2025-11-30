@@ -1,10 +1,7 @@
 using NSubstitute;
 using NUnit.Framework;
-using System.Collections;
-using System.Reflection;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.TestTools;
 
 public class EditModeTests
 {
@@ -85,7 +82,7 @@ public class EditModeTests
 
         var trueValue = 0.3f;
         var expectedValue = scritp.tallObstacleChance;
-        Assert.AreEqual(expectedValue,trueValue, "La valeur de tallObstacleChance n'est pas 0.3");
+        Assert.AreEqual(expectedValue, trueValue, "La valeur de tallObstacleChance n'est pas 0.3");
     }
 
     [Test]
@@ -134,7 +131,7 @@ public class EditModeTests
         GameObject groundTile = new GameObject("GroundTile");
         var tile = groundTile.AddComponent<GroundTile>();
         BoxCollider bc = groundTile.AddComponent<BoxCollider>();
-        bc.size = new Vector3(10,1,10);
+        bc.size = new Vector3(10, 1, 10);
 
         GameObject testCoin = new GameObject("Coin");
         tile.coinPrefab = testCoin;
