@@ -2,40 +2,37 @@ using UnityEngine;
 
 public class GroundTile : MonoBehaviour
 {
-    private GroundSpawner groundSpawner;
-    [SerializeField] GameObject obstaclePrefab;
-    [SerializeField] GameObject coinPrefab;
-    [SerializeField] GameObject tallObstaclePrefab;
+    public IGroundSpawner groundSpawner;
+    public GameObject obstaclePrefab;
+    public GameObject coinPrefab;
+    public GameObject tallObstaclePrefab;
     public float tallObstacleChance = 0.3f;
 
     private void Awake()
     {
-
-        GameObject groundSpawnerGO = GameObject.FindGameObjectWithTag("GroundSpawner");
-        if (!groundSpawnerGO)
+        if (groundSpawner == null)
         {
-            Debug.Log("Aucun GroundSpawner trouvé dans la scène");
-            enabled = false;
-            return;
+            var spawnerObj = GameObject.FindGameObjectWithTag("GroundSpawner");
+            if (spawnerObj != null)
+                groundSpawner = spawnerObj.GetComponent<IGroundSpawner>();
         }
-        groundSpawner = groundSpawnerGO.GetComponent<GroundSpawner>();
-        if (!groundSpawner)
-        {
-            Debug.Log("Aucun script groundSpawner associé avec le GroundSpawner");
-            enabled = false;
-            return;
-        }
-
     }
 
     private void OnTriggerExit(Collider other)
     {
+        TraiterSortie(other);
+    }
+
+    public void TraiterSortie(Collider other)
+    {
         if (other.CompareTag("Player"))
         {
             groundSpawner.SpawnTile(true);
-            Destroy(gameObject, 2);
+            if(Application.isPlaying)
+                Destroy(gameObject, 2);
+            else
+                DestroyImmediate(gameObject);
         }
-
     }
 
     public void SpawnObstacle()

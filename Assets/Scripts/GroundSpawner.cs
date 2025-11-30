@@ -1,6 +1,11 @@
 using UnityEngine;
 
-public class GroundSpawner : MonoBehaviour
+public interface IGroundSpawner
+{
+    void SpawnTile(bool spawnItems);
+}
+
+public class GroundSpawner : MonoBehaviour, IGroundSpawner
 {
     [SerializeField] GameObject groundTile;
     Vector3 nextSpawnPoint;

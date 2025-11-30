@@ -1,6 +1,7 @@
-using System.Collections;
 using NSubstitute;
 using NUnit.Framework;
+using System.Collections;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -85,6 +86,70 @@ public class EditModeTests
         var trueValue = 0.3f;
         var expectedValue = scritp.tallObstacleChance;
         Assert.AreEqual(expectedValue,trueValue, "La valeur de tallObstacleChance n'est pas 0.3");
+    }
+
+    [Test]
+    public void OnTriggerExit_Player_Emerick()
+    {
+        GameObject tileGround = new GameObject("GroundTile");
+        var groundTileScript = tileGround.AddComponent<GroundTile>();
+
+        IGroundSpawner mockSpawner = Substitute.For<IGroundSpawner>();
+        groundTileScript.groundSpawner = mockSpawner;
+
+        GameObject player = new GameObject("Player");
+        player.tag = "Player";
+        var playerBC = player.AddComponent<BoxCollider>();
+
+        groundTileScript.TraiterSortie(playerBC);
+        mockSpawner.Received(1).SpawnTile(true);
+
+        Object.DestroyImmediate(tileGround);
+        Object.DestroyImmediate(player);
+    }
+
+    [Test]
+    public void OnTriggerExit_NonPlayer_Emerick()
+    {
+        GameObject groundTile = new GameObject("GroundTile");
+        var groundTileScript = groundTile.AddComponent<GroundTile>();
+
+        IGroundSpawner mockSpawner = Substitute.For<IGroundSpawner>();
+        groundTileScript.groundSpawner = mockSpawner;
+
+        GameObject otherGO = new GameObject("AutreObjet");
+        otherGO.tag = "Untagged";
+        var otherBC = otherGO.AddComponent<BoxCollider>();
+
+        groundTileScript.TraiterSortie(otherBC);
+        mockSpawner.DidNotReceive().SpawnTile(true);
+
+        Object.DestroyImmediate(groundTile);
+        Object.DestroyImmediate(otherGO);
+    }
+
+    [Test]
+    public void SpawnCoin_Emerick()
+    {
+        GameObject groundTile = new GameObject("GroundTile");
+        var tile = groundTile.AddComponent<GroundTile>();
+        BoxCollider bc = groundTile.AddComponent<BoxCollider>();
+        bc.size = new Vector3(10,1,10);
+
+        GameObject testCoin = new GameObject("Coin");
+        tile.coinPrefab = testCoin;
+
+        var objetAvant = groundTile.transform.childCount;
+        tile.SpawnCoins();
+        var objetApres = groundTile.transform.childCount;
+
+        var expectedCoin = objetAvant + 10;
+        var realCoin = objetApres;
+
+        Assert.AreEqual(realCoin, expectedCoin, "Il devrait y avoir 10 piece en plus");
+
+        Object.DestroyImmediate(groundTile);
+        Object.DestroyImmediate(testCoin);
     }
 }
 
