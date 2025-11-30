@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
     private const string DEATH_ANIMATION_NAME = "Death_b";
     private const string DEATH_TYPE_NAME = "DeathType_int";
     private const string HORIZONTAL_AXIS_NAME = "Horizontal";
+    private const string JUMP_TRIGGER_NAME = "Jump_trig";
 
     private void Awake()
     {
@@ -166,7 +167,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
     {
         if (isOnGround)
         {
-            playerAnim.SetTrigger("Jump_trig");
+            playerAnim.SetTrigger(JUMP_TRIGGER_NAME);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
         }
