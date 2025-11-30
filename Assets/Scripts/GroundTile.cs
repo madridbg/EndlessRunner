@@ -61,7 +61,7 @@ public class GroundTile : MonoBehaviour
         {
             int obstacleIndex = Random.Range(0, smallObstaclesToSpawn.Length);
             GameObject obstacleToSpawn = smallObstaclesToSpawn[obstacleIndex];
- 
+
             // Déterminer s'il s'agit d'un obstacle large ou non. (Peut être modifié dans l'inspecteur)
             float random = Random.Range(0.0f, 1.0f);
             if (random < tallObstacleChance)
