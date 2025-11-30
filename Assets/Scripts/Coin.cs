@@ -6,11 +6,11 @@ public class Coin : MonoBehaviour
     private AudioSource playerAudio;
     public AudioClip pickupSound;
 
-    const string obstacleTag = "Obstacle";
-    const string playerTag = "Player";
+    const string OBSTACLE_TAG = "Obstacle";
+    const string PLAYER_TAG = "Player";
     private void Awake()
     {
-        GameObject player = GameObject.FindGameObjectWithTag(playerTag);
+        GameObject player = GameObject.FindGameObjectWithTag(PLAYER_TAG);
         if (player == null)
         {
             Debug.Log($"Aucun GameObject Player trouvé dans la scène");
@@ -20,20 +20,20 @@ public class Coin : MonoBehaviour
         playerAudio = player.GetComponent<AudioSource>();
         if (playerAudio == null)
         {
-            Debug.Log($"Aucune composante AudioSource associée à l'objet {playerTag}");
+            Debug.Log($"Aucune composante AudioSource associée à l'objet {PLAYER_TAG}");
             enabled = false;
             return;
         }
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(obstacleTag))
+        if (other.CompareTag(OBSTACLE_TAG))
         {
             Destroy(gameObject);
             return;
         }
 
-        if (other.CompareTag(playerTag))
+        if (other.CompareTag(PLAYER_TAG))
         {
             GameManager.inst.IncrementScore();
             playerAudio.PlayOneShot(pickupSound, 1.0f);

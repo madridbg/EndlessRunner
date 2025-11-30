@@ -5,39 +5,86 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
 
     public bool alive = true;
     public float speed = 5;
-    private Rigidbody rb;
-    private Animator playerAnim;
     float horizontalInput;
-    [SerializeField] float horizontalMultiplier;
+    private bool isOnGround;
     public float speedIncreasePerPoint = 0.5f;
-    private GameManager gameManager;
-    public ParticleSystem explosionParticle;
-    public ParticleSystem twinkleEffect;
+    [SerializeField] float horizontalMultiplier;
     [SerializeField] float jumpForce = 400.0f;
     [SerializeField] LayerMask groundMask;
+
+    private GameManager gameManager;
+    public GameObject groundTile;
+
     public AudioClip crashSound;
     private AudioSource playerAudio;
     private AudioSource backgroundAudio;
-    public GameObject groundTile;
+
+    public ParticleSystem explosionParticle;
+    public ParticleSystem twinkleEffect;
     public ParticleSystem dust;
-    private bool isOnGround;
+
+    private Rigidbody rb;
+    private Animator playerAnim;
+
+    private const string GAMEMANAGER_NAME = "GameManager";
+    private const string MAIN_CAMERA_NAME = "Main Camera";
+    private const string GROUND_TAG = "Ground";
+    private const string COIN_TAG = "Coin";
+    private const string DEATH_ANIMATION_NAME = "Death_b";
+    private const string DEATH_TYPE_NAME = "DeathType_int";
+    private const string HORIZONTAL_AXIS_NAME = "Horizontal";
+
     private void Awake()
     {
         playerAudio = GetComponent<AudioSource>();
         playerAnim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        backgroundAudio = GameObject.Find("Main Camera").GetComponent<AudioSource>();
 
-        if (!rb)
+        if (playerAudio == null)
         {
-            Debug.Log("Aucune composante de RigidBody associé à l'objet Player");
+            Debug.Log($"Aucune composante AudioSource associé à l'objet {name}");
             enabled = false;
             return;
         }
-        if (!playerAnim)
+        if (playerAnim == null)
         {
-            Debug.Log("Aucune composante de Aninmator dans le player");
+            Debug.Log($"Aucune composante Animator associé à l'objet {name}");
+            enabled = false;
+            return;
+        }
+        if (rb == null)
+        {
+            Debug.Log($"Aucune composante de RigidBody associé à l'objet {name}");
+            enabled = false;
+            return;
+        }
+
+        GameObject gameManagerGO = GameObject.Find(GAMEMANAGER_NAME);
+        if (gameManagerGO == null)
+        {
+            Debug.Log($"Aucun objet au nom de {GAMEMANAGER_NAME} ");
+            enabled = false;
+            return;
+        }
+        gameManager = gameManagerGO.GetComponent<GameManager>();
+        if (gameManager == null)
+        {
+            Debug.Log($"Aucune composante GameManager associée à l'objet {GAMEMANAGER_NAME} ");
+            enabled = false;
+            return;
+        }
+
+        GameObject mainCamera = GameObject.Find(MAIN_CAMERA_NAME);
+        if (gameManagerGO == null)
+        {
+            Debug.Log($"Aucun objet au nom de {MAIN_CAMERA_NAME} ");
+            enabled = false;
+            return;
+        }
+        backgroundAudio = mainCamera.GetComponent<AudioSource>();
+        if (gameManager == null)
+        {
+            Debug.Log($"Aucune composante AudioSource associée à l'objet {MAIN_CAMERA_NAME} ");
             enabled = false;
             return;
         }
@@ -45,7 +92,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
     }
     private void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
+        horizontalInput = Input.GetAxis(HORIZONTAL_AXIS_NAME);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -78,11 +125,11 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Ground"))
+        if (other.gameObject.CompareTag(GROUND_TAG))
         {
             isOnGround = true;
         }
-        if (other.gameObject.CompareTag("Coin"))
+        if (other.gameObject.CompareTag(COIN_TAG))
         {
             twinkleEffect.Play();
         }
@@ -93,8 +140,8 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
         if (!alive) return;
         alive = false;
 
-        playerAnim.SetBool("Death_b", true);
-        playerAnim.SetInteger("DeathType_int", 1);
+        playerAnim.SetBool(DEATH_ANIMATION_NAME, true);
+        playerAnim.SetInteger(, 1);
         explosionParticle.Play();
         playerAudio.PlayOneShot(crashSound, 1.0f);
         gameManager.GameOver();

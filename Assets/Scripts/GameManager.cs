@@ -20,13 +20,40 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI coinsText;
     [SerializeField] PlayerMovement playerMovement;
 
+    private const string PLAYER_NAME = "Player";
+
+    void Awake()
+    {
+        // Instancie l'attribut statique du GameManager, pour pouvoir s'en servir plus tard et que les valeurs du score restent les mêmes.
+        inst = this;
+
+        GameObject player = GameObject.Find(PLAYER_NAME);
+        if (player == null)
+        {
+            Debug.Log($"Aucun objet au nom de {PLAYER_NAME} trouvé dans la scène");
+            enabled = false;
+            return;
+        }
+
+        pm = player.GetComponent<PlayerMovement>();
+        if (pm == null)
+        {
+            Debug.Log($"Aucune composante PlayerMovement associée à l'objet {PLAYER_NAME}");
+            enabled = false;
+            return;
+        }
+
+        gameManagerAudio = GetComponent<AudioSource>();
+        if (gameManagerAudio == null)
+        {
+            Debug.Log($"Aucune composante AudioSource associée à l'objet {name}");
+            enabled = false;
+            return;
+        }
+    }
     void Start()
     {
         isGameActive = true;
-        pm = GameObject.Find("Player").GetComponent<PlayerMovement>();
-        gameManagerAudio = GetComponent<AudioSource>();
-
-
         score = 0;
         lastMilestoneScore = 0;
     }
@@ -52,10 +79,6 @@ public class GameManager : MonoBehaviour
         playerMovement.speed += playerMovement.speedIncreasePerPoint;
     }
 
-    private void Awake()
-    {
-        inst = this;
-    }
 
     void CheckMilestone()
     {

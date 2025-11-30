@@ -7,10 +7,11 @@ public interface IPlayerMovement
 public class Obstacle : MonoBehaviour
 {
     public IPlayerMovement playerMovement;
+    private const string PLAYER_TAG = "Player";
     private void Awake()
     {
 
-        GameObject playerMovementGO = GameObject.FindGameObjectWithTag("Player");
+        GameObject playerMovementGO = GameObject.FindGameObjectWithTag(PLAYER_TAG);
         if (!playerMovementGO)
         {
             Debug.Log("Aucun Player trouvé dans la scène");
@@ -35,7 +36,7 @@ public class Obstacle : MonoBehaviour
 
     public void CheckCollision(GameObject hitObject)
     {
-        if (hitObject.name == "Player")
+        if (hitObject.CompareTag(PLAYER_TAG))
         {
             if (playerMovement != null) playerMovement.Die();
         }

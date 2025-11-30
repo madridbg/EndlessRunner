@@ -9,15 +9,15 @@ public class GroundTile : MonoBehaviour
     public float tallObstacleChance = 0.3f;
 
 
-    const string groundSpawnerName = "GroundSpawner";
-
+    private const string GROUNDSPAWNER_NAME = "GroundSpawner";
+    private const string PLAYER_TAG = "Player";
 
     private void Awake()
     {
-        var spawnerObj = GameObject.FindGameObjectWithTag(groundSpawnerName);
+        var spawnerObj = GameObject.FindGameObjectWithTag(GROUNDSPAWNER_NAME);
         if (spawnerObj == null)
         {
-            Debug.LogError($"Aucun objet nommé {groundSpawnerName} trouvé dans la scène.");
+            Debug.LogError($"Aucun objet nommé {GROUNDSPAWNER_NAME} trouvé dans la scène.");
             enabled = false;
             return;
         }
@@ -25,7 +25,7 @@ public class GroundTile : MonoBehaviour
         if (groundSpawner == null)
         {
 
-            Debug.LogError($"Aucune composante IGroundSpawner associée à l'objet {groundSpawnerName} trouvé dans la scène.");
+            Debug.LogError($"Aucune composante IGroundSpawner associée à l'objet {GROUNDSPAWNER_NAME} trouvé dans la scène.");
             enabled = false;
             return;
 
@@ -39,7 +39,7 @@ public class GroundTile : MonoBehaviour
 
     public void TraiterSortie(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag(PLAYER_TAG))
         {
             groundSpawner.SpawnTile(true);
             if (Application.isPlaying)
