@@ -72,7 +72,7 @@ public class GroundTile : MonoBehaviour
                 obstacleToSpawn.transform.position = RandomPositionLarge;
             }
 
-            
+
             return obstacleToSpawn;
         }
     }
