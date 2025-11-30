@@ -165,6 +165,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
     {
         if (isOnGround)
         {
+            playerAnim.SetTrigger("Jump_trig");
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
         }
