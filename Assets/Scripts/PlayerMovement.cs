@@ -7,13 +7,15 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
     public float speed = 5;
     float horizontalInput;
     private bool isOnGround;
-    public float speedIncreasePerPoint = 0.5f;
+    public float speedIncreasePerPoint = 0.05f;
     [SerializeField] float horizontalMultiplier;
     [SerializeField] float jumpForce = 400.0f;
     [SerializeField] LayerMask groundMask;
 
     private GameManager gameManager;
     public GameObject groundTile;
+    private BoxCollider groundCollider;
+    private float groundSize;
 
     public AudioClip crashSound;
     private AudioSource playerAudio;
@@ -89,6 +91,14 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
             return;
         }
 
+        groundCollider = groundTile.GetComponent<BoxCollider>();
+        if (groundCollider == null)
+        {
+            Debug.Log($"Aucune composante BoxCollider associée à l'objet {groundTile.name} ");
+            enabled = false;
+            return;
+        }
+        groundSize = groundCollider.size.x / 2;
     }
     private void Update()
     {
@@ -99,25 +109,26 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
             Jump();
         }
 
-        if (transform.position.y < -5)
-        {
-            Die();
-        }
     }
+
     void FixedUpdate()
     {
         if (!alive) return;
 
-        float groundSize = groundTile.GetComponent<BoxCollider>().size.x / 2;
+        // Traiter le mouvement, que l'on vérifie avant de l'effectuer. Cela nous permet de ne pas dépasser les limites du sol.
         Vector3 forwardMove = transform.forward * Time.fixedDeltaTime * speed;
-        if ((rb.position.x >= groundSize && horizontalInput > 0)
-            || (rb.position.x <= -groundSize && horizontalInput < 0))
-        {
-            horizontalInput = 0;
-        }
         Vector3 horizontalMove = transform.right * horizontalInput * speed * Time.fixedDeltaTime * horizontalMultiplier;
+        Vector3 nextPosition = rb.position + forwardMove + horizontalMove;
 
-        rb.MovePosition(rb.position + forwardMove + horizontalMove);
+        if (nextPosition.x <= -groundSize)
+        {
+            nextPosition.x = -groundSize;
+        }
+        else if (nextPosition.x >= groundSize)
+        {
+            nextPosition.x = groundSize;
+        }
+        rb.MovePosition(nextPosition);
 
         if (isOnGround)
             dust.Play();
