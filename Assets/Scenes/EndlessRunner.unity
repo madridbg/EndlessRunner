@@ -172,6 +172,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bb2857d4ce7df3b479596e15ba3e53af, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bb2857d4ce7df3b479596e15ba3e53af, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -223,10 +227,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alive: 1
-  speed: 15
+  speed: 12
   speedIncreasePerPoint: 0.05
   horizontalMultiplier: 1.7
-  jumpForce: 750
+  jumpForce: 700
   groundMask:
     serializedVersion: 2
     m_Bits: 64
@@ -264,7 +268,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 84473076}
   serializedVersion: 4
-  m_Mass: 42
+  m_Mass: 50
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1638,7 +1642,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1409094903}
   milestoneSound: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
-  gravityModifier: 2
   isGameActive: 0
   gameOverText: {fileID: 1324327719}
   restartButton: {fileID: 953059976}
