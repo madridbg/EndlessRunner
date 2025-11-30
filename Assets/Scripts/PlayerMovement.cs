@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
     public float speedIncreasePerPoint = 0.5f;
     private GameManager gameManager;
     public ParticleSystem explosionParticle;
+    public ParticleSystem twinkleEffect;
     [SerializeField] float jumpForce = 400.0f;
     [SerializeField] LayerMask groundMask;
     public AudioClip crashSound;
@@ -80,6 +81,10 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
         if (other.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
+        }
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            twinkleEffect.Play();
         }
     }
 
