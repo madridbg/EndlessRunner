@@ -52,7 +52,7 @@ public class GroundTile : MonoBehaviour
     public void SpawnObstacle()
     {
         GameObject obstacleToSpawn = RandomGameObject;
-        _ = Instantiate(obstacleToSpawn, RandomPosition, obstacleToSpawn.transform.rotation, transform);
+        _ = Instantiate(obstacleToSpawn, obstacleToSpawn.transform.position, obstacleToSpawn.transform.rotation, transform);
     }
 
     private GameObject RandomGameObject
@@ -61,6 +61,7 @@ public class GroundTile : MonoBehaviour
         {
             int obstacleIndex = Random.Range(0, smallObstaclesToSpawn.Length);
             GameObject obstacleToSpawn = smallObstaclesToSpawn[obstacleIndex];
+            obstacleToSpawn.transform.position = RandomPositionSmall;
 
             // Déterminer s'il s'agit d'un obstacle large ou non. (Peut être modifié dans l'inspecteur)
             float random = Random.Range(0.0f, 1.0f);
@@ -68,16 +69,33 @@ public class GroundTile : MonoBehaviour
             {
                 obstacleIndex = Random.Range(0, largeObstaclesToSpawn.Length);
                 obstacleToSpawn = largeObstaclesToSpawn[obstacleIndex];
+                obstacleToSpawn.transform.position = RandomPositionLarge;
             }
+
+            
             return obstacleToSpawn;
         }
     }
 
-    private Vector3 RandomPosition
+    private Vector3 RandomPositionSmall
     {
         get
         {
             float randomXPosition = Random.Range(-3.3f, 3.3f);
+            float groundYPosition = transform.position.y;
+            float groundZPosition = transform.position.z;
+            Vector3 spawnPoint = new Vector3(randomXPosition, groundYPosition, groundZPosition);
+            return spawnPoint;
+        }
+
+    }
+
+    // Puisque les objets larges prennent beaucoup de place, leur point d'apparition est différent que celui des petits obstacles.
+    private Vector3 RandomPositionLarge
+    {
+        get
+        {
+            float randomXPosition = Random.Range(-3.0f, 3.0f);
             float groundYPosition = transform.position.y;
             float groundZPosition = transform.position.z;
             Vector3 spawnPoint = new Vector3(randomXPosition, groundYPosition, groundZPosition);
