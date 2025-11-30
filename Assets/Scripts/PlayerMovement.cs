@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
     private bool isOnGround;
     public float speedIncreasePerPoint = 0.05f;
     [SerializeField] float horizontalMultiplier;
-    [SerializeField] float jumpForce = 400.0f;
+    [SerializeField] float jumpForce = 900.0f;
     [SerializeField] LayerMask groundMask;
 
     private GameManager gameManager;
@@ -102,6 +102,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
     }
     private void Update()
     {
+        if (!alive) return;
         horizontalInput = Input.GetAxis(HORIZONTAL_AXIS_NAME);
 
         if (Input.GetKeyDown(KeyCode.Space))
