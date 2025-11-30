@@ -106,6 +106,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            // Mauvaise pratique - Explication dans la documentation de Jacob
             Jump();
         }
 
@@ -162,10 +163,10 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
 
     void Jump()
     {
-        float height = GetComponent<Collider>().bounds.size.y;
-        bool isGrounded = Physics.Raycast(transform.position, Vector3.down, (height / 2) + 0.1f, groundMask);
-
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        isOnGround = false;
+        if (isOnGround)
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            isOnGround = false;
+        }
     }
 }
