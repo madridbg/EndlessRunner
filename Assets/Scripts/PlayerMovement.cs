@@ -141,7 +141,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
         alive = false;
 
         playerAnim.SetBool(DEATH_ANIMATION_NAME, true);
-        playerAnim.SetInteger(, 1);
+        playerAnim.SetInteger(DEATH_TYPE_NAME, 1);
         explosionParticle.Play();
         playerAudio.PlayOneShot(crashSound, 1.0f);
         gameManager.GameOver();
