@@ -36,6 +36,7 @@ public class EditModeTests
         obstacle.playerMovement = mockPlayer;
 
         GameObject playerObj = new GameObject("Player");
+        playerObj.tag = "Player"; 
 
         obstacle.CheckCollision(playerObj);
 
