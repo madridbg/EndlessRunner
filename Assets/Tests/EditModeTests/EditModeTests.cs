@@ -148,5 +148,39 @@ public class EditModeTests
         Object.DestroyImmediate(groundTile);
         Object.DestroyImmediate(testCoin);
     }
+
+    [Test]
+    public void TestConfigPrefab_Coin_Jacob()
+    {
+        const string path = "Assets/Prefab/Coin.prefab";
+
+        var coinPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+        Assert.IsNotNull(coinPrefab, "Coin.prefab non trouvé au chemin fourni");
+
+        var isPrefab = PrefabUtility.IsPartOfPrefabAsset(coinPrefab);
+        Assert.IsTrue(isPrefab, $"Le «{coinPrefab.name}» n'est pas un prefab");
+
+        var composanteCapsuleCollider = coinPrefab.GetComponent<CapsuleCollider>();
+        Assert.IsNotNull(composanteCapsuleCollider, $"Aucune composante CapsuleCollider associée au {coinPrefab.name}");
+
+        var isTrigger = composanteCapsuleCollider.isTrigger;
+        Assert.IsTrue(isTrigger, $"La composante {composanteCapsuleCollider.name} du {coinPrefab.name} n'est pas un Trigger");
+
+        var composanteRigidBody = coinPrefab.GetComponent<Rigidbody>();
+        Assert.IsNotNull(composanteRigidBody, $"Aucune composante RigidBody associée au {coinPrefab.name}");
+
+        var usesGravity = composanteRigidBody.useGravity;
+        Assert.IsTrue(usesGravity, $"La composante {composanteRigidBody.name} du {coinPrefab.name} n'utilise pas de gravité");
+
+        var isKinematic = composanteRigidBody.isKinematic;
+        Assert.IsTrue(isKinematic, $"La composante {composanteRigidBody.name} du {coinPrefab.name} n'est pas affecté par la physique");
+
+        var composanteCoinScript = coinPrefab.GetComponent<Coin>();
+        Assert.IsNotNull(composanteCoinScript, $"Aucune script Coin associée au {coinPrefab.name}");
+
+        var audioClip = composanteCoinScript.pickupSound;
+        Assert.IsNotNull(audioClip, $"Aucune valeur au champ pickupSound du script {composanteCoinScript.name} ");
+
+    }
 }
 
