@@ -8,17 +8,17 @@ public class EditModeTests
     [Test]
     public void TestConfigPrefab_Obstacle_Madrid()
     {
-        string assetPath = "Assets/Prefab/Obstacle.prefab";
+        string assetPath = "Assets/Prefab/Small Obstacles/SM_Prop_ParkBench_01.prefab";
         var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
         Assert.IsNotNull(prefab, "Le prefab obstacle est introuvable");
 
-        var bc = prefab.GetComponent<BoxCollider>();
-        Assert.IsNotNull(bc, "Le prefab obstacle ne détient pas de Box Collider");
+        var mc = prefab.GetComponent<MeshCollider>();
+        Assert.IsNotNull(mc, "Le prefab obstacle ne détient pas de Mesh Collider");
 
         var render = prefab.GetComponent<MeshRenderer>();
         Assert.IsNotNull(render, "Le prefab obstacle ne détient pas de composant Renderer");
 
-        string materialPath = "Assets/Materials/Obstacle_Mat.mat";
+        string materialPath = "Assets/SyntyStudios/PolygonCity/Materials/PolygonCity_Mat_01_A.mat";
         var expectedMaterial = AssetDatabase.LoadAssetAtPath<Material>(materialPath);
         Assert.IsNotNull(expectedMaterial, $"Le material de référence n'a pas été trouvé au chemin {materialPath}");
 
