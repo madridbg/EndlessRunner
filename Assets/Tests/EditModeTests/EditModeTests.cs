@@ -81,9 +81,9 @@ public class EditModeTests
         Assert.IsNotNull(scritp, "Le script Ground Tile est introuvable");
         Assert.IsNotNull(scritp.tallObstacleChance, "Le parametre tallObstacleChance est introuvable");
 
-        var trueValue = 0.3f;
+        var trueValue = 0.4f;
         var expectedValue = scritp.tallObstacleChance;
-        Assert.AreEqual(expectedValue, trueValue, "La valeur de tallObstacleChance n'est pas 0.3");
+        Assert.AreEqual(expectedValue, trueValue, "La valeur de tallObstacleChance n'est pas 0.4");
     }
 
     [Test]
@@ -141,10 +141,10 @@ public class EditModeTests
         tile.SpawnCoins();
         var objetApres = groundTile.transform.childCount;
 
-        var expectedCoin = objetAvant + 10;
+        var expectedCoin = objetAvant + 5;
         var realCoin = objetApres;
 
-        Assert.AreEqual(realCoin, expectedCoin, "Il devrait y avoir 10 piece en plus");
+        Assert.AreEqual(realCoin, expectedCoin, "Il devrait y avoir 5 piece en plus");
 
         Object.DestroyImmediate(groundTile);
         Object.DestroyImmediate(testCoin);

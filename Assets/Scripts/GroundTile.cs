@@ -6,7 +6,7 @@ public class GroundTile : MonoBehaviour
     public GameObject[] smallObstaclesToSpawn;
     public GameObject[] largeObstaclesToSpawn;
     public GameObject coinPrefab;
-    public float tallObstacleChance = 0.3f;
+    public float tallObstacleChance;
 
 
     private const string GROUNDSPAWNER_NAME = "GroundSpawner";
