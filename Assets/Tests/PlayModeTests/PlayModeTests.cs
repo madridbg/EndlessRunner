@@ -24,7 +24,7 @@ public class PlayModeTests
         var playerMovement = player.GetComponent<PlayerMovement>();
         Assert.IsTrue(playerMovement != null, "Le script PlayerMovement n'existe pas sur player");
 
-        Assert.IsTrue(playerMovement.alive, "Le player devrait être vivant du début du test");
+        Assert.IsTrue(playerMovement.MyDependencies.isAlive, "Le player devrait être vivant du début du test");
 
         yield return new WaitForSeconds(3.0f);
 
@@ -36,7 +36,7 @@ public class PlayModeTests
         yield return new WaitForFixedUpdate();
         yield return new WaitForSeconds(0.1f);
 
-        Assert.IsFalse(playerMovement.alive, "Le joueur devrait être mort après la collision");
+        Assert.IsFalse(playerMovement.MyDependencies.isAlive, "Le joueur devrait être mort après la collision");
     }
 
     [UnityTest]

@@ -1,12 +1,29 @@
 using UnityEngine;
 
+public class PlayerDependencies
+{
+    public virtual bool SpaceInput
+    {
+        get
+        {
+            return Input.GetKeyDown(KeyCode.Space);
+        }
+    }
+
+    public virtual bool isOnGround { get; set; } = true;
+    public virtual bool isAlive { get; set; } = true;
+    public virtual float HorizontalInput
+    {
+        get
+        {
+            return Input.GetAxis(PlayerMovement.HORIZONTAL_AXIS_NAME);
+        }
+    }
+}
 public class PlayerMovement : MonoBehaviour, IPlayerMovement
 {
 
-    public bool alive = true;
     public float speed = 5;
-    float horizontalInput;
-    private bool isOnGround;
     public float speedIncreasePerPoint = 0.05f;
     [SerializeField] float horizontalMultiplier;
     [SerializeField] float jumpForce = 900.0f;
@@ -28,13 +45,15 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
     private Rigidbody rb;
     private Animator playerAnim;
 
+    public PlayerDependencies MyDependencies = new PlayerDependencies();
+
     private const string GAMEMANAGER_NAME = "GameManager";
     private const string MAIN_CAMERA_NAME = "Main Camera";
     private const string GROUND_TAG = "Ground";
     private const string COIN_TAG = "Coin";
     private const string DEATH_ANIMATION_NAME = "Death_b";
     private const string DEATH_TYPE_NAME = "DeathType_int";
-    private const string HORIZONTAL_AXIS_NAME = "Horizontal";
+    public const string HORIZONTAL_AXIS_NAME = "Horizontal";
     private const string JUMP_TRIGGER_NAME = "Jump_trig";
 
     private void Awake()
@@ -103,10 +122,9 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
     }
     private void Update()
     {
-        if (!alive) return;
-        horizontalInput = Input.GetAxis(HORIZONTAL_AXIS_NAME);
+        if (!MyDependencies.isAlive) return;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (MyDependencies.SpaceInput)
         {
             // Mauvaise pratique - Explication dans la documentation de Jacob
             Jump();
@@ -116,11 +134,11 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
 
     void FixedUpdate()
     {
-        if (!alive) return;
+        if (!MyDependencies.isAlive) return;
 
         // Traiter le mouvement, que l'on vérifie avant de l'effectuer. Cela nous permet de ne pas dépasser les limites du sol.
         Vector3 forwardMove = transform.forward * Time.fixedDeltaTime * speed;
-        Vector3 horizontalMove = transform.right * horizontalInput * speed * Time.fixedDeltaTime * horizontalMultiplier;
+        Vector3 horizontalMove = transform.right * MyDependencies.HorizontalInput * speed * Time.fixedDeltaTime * horizontalMultiplier;
         Vector3 nextPosition = rb.position + forwardMove + horizontalMove;
 
         if (nextPosition.x <= -groundSize)
@@ -133,7 +151,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
         }
         rb.MovePosition(nextPosition);
 
-        if (isOnGround)
+        if (MyDependencies.isOnGround && !MyDependencies.isAlive)
             dust.Play();
     }
 
@@ -141,7 +159,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
     {
         if (other.gameObject.CompareTag(GROUND_TAG))
         {
-            isOnGround = true;
+            MyDependencies.isOnGround = true;
         }
         if (other.gameObject.CompareTag(COIN_TAG))
         {
@@ -151,8 +169,8 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
 
     public void Die()
     {
-        if (!alive) return;
-        alive = false;
+        if (!MyDependencies.isAlive) return;
+        MyDependencies.isAlive = false;
 
         playerAnim.SetBool(DEATH_ANIMATION_NAME, true);
         playerAnim.SetInteger(DEATH_TYPE_NAME, 1);
@@ -163,13 +181,13 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
         dust.Stop();
     }
 
-    void Jump()
+    public void Jump()
     {
-        if (isOnGround)
+        if (MyDependencies.isOnGround)
         {
             playerAnim.SetTrigger(JUMP_TRIGGER_NAME);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isOnGround = false;
+            MyDependencies.isOnGround = false;
         }
     }
 }
