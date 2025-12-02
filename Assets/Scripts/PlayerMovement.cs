@@ -151,7 +151,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
         }
         rb.MovePosition(nextPosition);
 
-        if (MyDependencies.isOnGround && !MyDependencies.isAlive)
+        if (MyDependencies.isOnGround && MyDependencies.isAlive)
             dust.Play();
     }
 

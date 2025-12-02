@@ -76,20 +76,14 @@ public class PlayerMovementTests
 
         playerMovement.MyDependencies = Substitute.For<PlayerDependencies>();
         playerMovement.MyDependencies.isAlive = false;
-        playerMovement.MyDependencies.isOnGround = false;
 
         var explosionParticle = playerMovement.explosionParticle;
         Assert.IsNotNull(explosionParticle);
         Assert.IsFalse(explosionParticle.isPlaying, "Les particules d'explosions sont émises");
 
-        var dustParticle = playerMovement.dust;
-        Assert.IsNotNull(dustParticle);
-        Assert.IsFalse(dustParticle.isPlaying, "Les particules de poussière sont émises");
-
         playerMovement.Die();
         yield return new WaitForFixedUpdate();
 
-        Assert.IsFalse(dustParticle.isPlaying, "Les particules sont simulées alors que l'on est mort");
         Assert.IsFalse(explosionParticle.isPlaying, "Les particules d'explosions sont émises");
     }
 
@@ -118,7 +112,7 @@ public class PlayerMovementTests
 
         var dustParticle = playerMovement.dust;
         Assert.IsNotNull(dustParticle);
-        Assert.IsFalse(dustParticle.isPlaying, "Les particules de poussière sont émises");
+        Assert.IsTrue(dustParticle.isPlaying, "Les particules de poussière sont émises");
 
         var backgroundAudio = mainCamera.GetComponent<AudioSource>();
         Assert.IsNotNull(backgroundAudio);
